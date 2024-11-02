@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import Link from "next/link";
 import { sora_font } from "../preloader/Preloader";
@@ -31,7 +30,6 @@ export default function Contact() {
     e.preventDefault();
     setButtonText("Sending...");
 
-    // Send the email using EmailJS
     emailjs
       .send(
         process.env.NEXT_PUBLIC_SERVICE_ID!,

@@ -61,7 +61,7 @@ export function BackgroundLinesDemo() {
             className={`${sora_font.className} uppercase mt-4 md:text-base text-xs md:px-4 px-2`}
           >
             {" "}
-            a front end web Developer
+            a  web Developer
           </p>
           <span className="h-[1px] md:w-[150px] w-[50px]  bg-gradient-to-r from-[#FF3600] to-shade mt-3" />
         </div>
