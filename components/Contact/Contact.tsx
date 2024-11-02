@@ -2,10 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { MdEmail } from "react-icons/md";
 import { sora_font } from "../preloader/Preloader";
-import { IoCall } from "react-icons/io5";
-import { FiGithub } from "react-icons/fi";
+import { MdArrowOutward } from "react-icons/md";
 import { FaLinkedinIn } from "react-icons/fa";
 import { IoLogoGithub } from "react-icons/io5";
 import { FaXTwitter } from "react-icons/fa6";
@@ -98,7 +96,7 @@ export default function Contact() {
 
           <div className="grid grid-cols-3 place-items-center md:place-items-start ">
             <div className="space-y-4">
-              <Link href={"/"}>
+              <Link href={"https://github.com/venkateshmadari"} target="_blank">
                 <h3 className="text-primary text-xl capitalize flex items-center gap-2">
                   <IoLogoGithub className="text-shade" />
                   Github
@@ -107,7 +105,10 @@ export default function Contact() {
             </div>
 
             <div className="space-y-4">
-              <Link href={"/"}>
+              <Link
+                href={"https://www.linkedin.com/in/venkateshmadari"}
+                target="_blank"
+              >
                 <h3 className="text-primary text-xl capitalize flex items-center gap-2">
                   <FaLinkedinIn className="text-shade" />
                   Linkedin
@@ -115,12 +116,20 @@ export default function Contact() {
               </Link>
             </div>
             <div className="space-y-4">
-              <Link href={"/"}>
+              <Link href={"https://x.com/MadariVenk4216"} target="_blank">
                 <h3 className="text-primary text-xl capitalize flex items-center gap-2">
                   <FaXTwitter className="text-shade" />X
                 </h3>
               </Link>
             </div>
+          </div>
+
+          <div>
+            <Link href={"https://venkateshmadari.netlify.app/"} target="_blank">
+              <p className="text-xs underline capitalize flex items-center gap-1">
+                visit my old portfolio <MdArrowOutward className="text-shade" />
+              </p>
+            </Link>
           </div>
         </div>
 
