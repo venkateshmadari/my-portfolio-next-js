@@ -1,4 +1,5 @@
 import ContactForm from "@/components/Contact/ContactForm";
+import Footer from "@/components/Home/Footer";
 
 export const metadata = {
   title: "Contact - Venkatesh madari",
@@ -7,5 +8,9 @@ export const metadata = {
 };
 
 export default function page() {
-  return <ContactForm />;
+  return (
+    <>
+      <ContactForm />
+    </>
+  );
 }

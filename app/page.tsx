@@ -1,6 +1,5 @@
 "use client";
 import About from "@/components/About/About";
-import AboutParallax from "@/components/About/AboutParallax";
 import { BackgroundLinesDemo } from "@/components/Home/BackgroundLinesDemo";
 import Divider from "@/components/Home/Divider";
 import Footer from "@/components/Home/Footer";
