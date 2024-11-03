@@ -16,7 +16,7 @@ interface FormData {
   message: string;
 }
 
-export default function Contact() {
+export default function ContactForm() {
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
     email: "",
@@ -32,15 +32,15 @@ export default function Contact() {
 
     emailjs
       .send(
-        process.env.NEXT_PUBLIC_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_TEMPLATE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
         {
           subject: formData.subject,
           user_name: formData.fullName,
           message: formData.message,
           user_email: formData.email,
         },
-        process.env.NEXT_PUBLIC_KEY!
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       )
       .then(() => {
         setFormData({

@@ -1,17 +1,11 @@
-import Contact from "@/components/Contact/Contact";
-import React from "react";
+import ContactForm from "@/components/Contact/ContactForm";
 
 export const metadata = {
   title: "Contact - Venkatesh madari",
-  description: "Get in touch with us for any inquiries, support, or feedback. We'd love to hear from you!",
+  description:
+    "Get in touch with us for any inquiries, support, or feedback. We'd love to hear from you!",
 };
 
-const Page = () => {
-  return (
-    <div>
-      <Contact />
-    </div>
-  );
-};
-
-export default Page;
+export default function page() {
+  return <ContactForm />;
+}
