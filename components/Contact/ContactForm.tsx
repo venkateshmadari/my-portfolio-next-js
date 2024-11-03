@@ -58,6 +58,7 @@ export default function ContactForm() {
       .catch((error) => {
         console.error("Email send error:", error);
         setButtonText("Send a message");
+        toast.error("Failed to send message. Please try again.");
       });
   };
 
