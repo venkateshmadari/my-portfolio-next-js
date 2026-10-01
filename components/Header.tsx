@@ -67,10 +67,10 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-20 border-b border-white/10 bg-[#0a0a0a]/90 backdrop-blur">
       <div className="mx-auto flex h-11 max-w-[720px] items-center justify-between border-x border-white/10 px-4 sm:px-6">
-        <span className="font-serif text-base tracking-wider text-white">
+        <Link href="/" className="font-serif text-base tracking-wider select-none text-white">
           Venkatesh
           <span className="ml-1 text-xs">♡</span>
-        </span>
+        </Link>
 
         <nav className="flex items-center gap-4 text-[11px] text-neutral-400">
           {/* Desktop navigation */}
