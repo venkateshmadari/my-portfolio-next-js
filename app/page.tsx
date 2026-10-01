@@ -6,6 +6,7 @@ import Projects from "@/components/Projects";
 import Education from "@/components/Education";
 import GithubActivity from "@/components/GithubActivity";
 import Closing from "@/components/Closing";
+import VisitorCounter from "@/components/ga4/VisitorCounter";
 
 export default function Page() {
   return (
@@ -18,6 +19,7 @@ export default function Page() {
         <Projects />
         <Education />
         <GithubActivity />
+        <VisitorCounter />
         <Closing />
       </main>
     </>
