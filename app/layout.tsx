@@ -11,7 +11,9 @@ const serif = Instrument_Serif({
   variable: "--font-serif",
 });
 import { Analytics } from "@vercel/analytics/next";
-import { GoogleAnalytics } from '@next/third-parties/google'
+import { GoogleAnalytics } from "@next/third-parties/google";
+import Header from "@/components/Header";
+import Closing from "@/components/Closing";
 
 export const metadata: Metadata = {
   title: "Madari Venkatesh",
@@ -29,6 +31,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
+        <Header />
         {children}
         <Toaster
           position="bottom-right"
@@ -42,6 +45,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           }}
         />
         <Analytics />
+        <Closing />
       </body>
       <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
     </html>

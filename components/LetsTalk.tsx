@@ -83,7 +83,7 @@ export default function LetsTalk() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="rounded-md bg-white px-4 py-2 text-[11px] font-semibold text-black"
+        className="rounded-md bg-primary px-4 py-2 text-[11px] font-semibold text-black cursor-pointer"
       >
         Let's Talk →
       </button>
