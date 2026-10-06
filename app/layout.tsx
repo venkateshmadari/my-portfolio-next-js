@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   title: "Madari Venkatesh",
   description: "Full-Stack Developer portfolio",
   icons: {
-    icon: "https://static.vecteezy.com/system/resources/thumbnails/057/507/977/small_2x/anime-character-design-free-vector.jpg",
+    icon: "/profile-2.png",
   },
 };
 
