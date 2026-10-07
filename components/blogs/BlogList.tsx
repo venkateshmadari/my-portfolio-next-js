@@ -12,6 +12,17 @@ export type Blog = {
 };
 
 export const blogs: Blog[] = [
+    {
+    id: "s3-cloudfront-image-upload-guide",
+    name: "AWS",
+    image: "/s3-cloudfront-image-upload.png",
+    title: "How to Upload Images to Amazon S3 and Serve Them with CloudFront Signed URLs in Node.js",
+    description:
+      "Store images in a private S3 bucket, optimize them with Sharp, and deliver them securely through CloudFront using short-lived signed URLs.",
+    techStacks: ["Amazon S3", "CloudFront", "IAM", "Node.js", "Multer", "Sharp", "Pem"],
+    minRead: 15,
+    link: "/blogs/s3-cloudfront-image-upload-guide",
+  },
   {
     id: "aws-ec2-production-deployment",
     name: "DevOps",
@@ -34,6 +45,7 @@ export const blogs: Blog[] = [
     minRead: 4,
     link: "/blogs/book-my-show-hld",
   },
+
 ];
 
 export const MAX_TAGS = 4;
