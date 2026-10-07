@@ -8,7 +8,7 @@ export type Blog = {
   description: string;
   techStacks: string[];
   minRead: number;
-  link: string; // e.g. "/blogs/aws-ec2-production-deployment"
+  link: string; 
 };
 
 export const blogs: Blog[] = [
