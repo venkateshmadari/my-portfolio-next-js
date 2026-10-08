@@ -1,7 +1,8 @@
 "use client";
 import { useState } from "react";
-import { ArrowLeft, Check, Copy } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Check, Copy } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 /* ───────────────────────── Types ───────────────────────── */
 type Block =
@@ -27,6 +28,7 @@ const META = {
   date: "Oct 07, 2026",
   read: "15 min read",
   tags: ["AWS", "S3", "CloudFront", "Node.js"],
+  image: "/s3-cloudfront-image-upload.png",
   stack: [
     "Amazon S3",
     "CloudFront",
@@ -647,6 +649,31 @@ export default function S3CloudFrontImageGuide() {
             ))}
           </div>
         </div>
+        <div className="border-t border-white/10 p-4 sm:p-6">
+          <a
+            href={META.image}
+            target="_blank"
+            rel="noreferrer"
+            className="group block min-w-0 rounded-md border border-white/10 bg-white/[.02] p-3"
+          >
+            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-sm bg-neutral-900">
+              <Image
+                src={META.image}
+                alt={"S3 and CloudFront Integration"}
+                fill
+                sizes="(min-width: 720px) 640px, 100vw"
+                priority
+                className="object-contain"
+              />
+            </div>
+            <div className="mt-3 flex items-center justify-between gap-3 font-mono text-[9px] text-neutral-500 group-hover:text-white">
+              <span>Fig. 1: S3 and CloudFront Integration</span>
+              <span className="flex shrink-0 items-center gap-1">
+                Open full size <ArrowUpRight size={10} />
+              </span>
+            </div>
+          </a>
+        </div>
       </header>
 
       <nav aria-label="On this page" className="border-b border-white/10">
@@ -656,7 +683,7 @@ export default function S3CloudFrontImageGuide() {
             On This Page
           </h2>
         </div>
-        <ol className="grid gap-x-6 gap-y-1.5 border-t border-white/10 px-4 py-4 font-mono text-[11px] text-neutral-400 sm:grid-cols-2 sm:px-6">
+        <ol className="grid gap-x-6 gap-y-1.5 border-t border-white/10 px-4 py-4 font-mono text-[11px] text-neutral-430 sm:grid-cols-2 sm:px-6">
           {STEPS.map((s, i) => (
             <li key={s.title} className="min-w-0">
               <a

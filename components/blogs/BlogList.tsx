@@ -38,7 +38,7 @@ export const blogs: Blog[] = [
     id: "book-my-show-hld",
     name: "System Design",
     image: "/bookmyshow-hld.png",
-    title: "Book My Show HLD",
+    title: "Book My Show HLD Breakdown",
     description:
       "Ticket booking looks simple: pick a seat, pay, done. The hard part is guaranteeing that one seat belongs to exactly one person.",
     techStacks: ["Load Balancing", "Redis", "Kafka", "Elasticsearch"],
