@@ -30,7 +30,7 @@ export default function VisitorCounter() {
       id="visitors"
       title="Total Visitors"
       right={
-        <span className="font-mono text-[9px] text-neutral-500">
+        <span className="font-mono text-[9px] text-neutral-400">
           since Oct 1, 2026
         </span>
       }
@@ -47,7 +47,7 @@ export default function VisitorCounter() {
             visitors?.toLocaleString()
           )}
         </p>
-        <p className="font-mono text-[9px] uppercase tracking-widest text-neutral-500">
+        <p className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
           Powered by GA4
         </p>
       </div>

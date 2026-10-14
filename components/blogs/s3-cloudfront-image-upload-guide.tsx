@@ -490,7 +490,7 @@ function Code({ v, lang }: { v: string; lang?: string }) {
       data-code
       className="min-w-0 overflow-hidden rounded-md border border-white/10 bg-black/40"
     >
-      <div className="flex items-center justify-between border-b border-white/10 px-3 py-1.5 font-mono text-[9px] text-neutral-500">
+      <div className="flex items-center justify-between border-b border-white/10 px-3 py-1.5 font-mono text-[9px] text-neutral-400">
         <span>{lang ?? "bash"}</span>
         <button
           type="button"
@@ -622,7 +622,7 @@ export default function S3CloudFrontImageGuide() {
           >
             <ArrowLeft size={12} /> All blogs
           </Link>
-          <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[10px] text-neutral-500">
+          <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[10px] text-neutral-400">
             <span>{META.date}</span>
             <span>·</span>
             <span>{META.read}</span>
@@ -666,7 +666,7 @@ export default function S3CloudFrontImageGuide() {
                 className="object-contain"
               />
             </div>
-            <div className="mt-3 flex items-center justify-between gap-3 font-mono text-[9px] text-neutral-500 group-hover:text-white">
+            <div className="mt-3 flex items-center justify-between gap-3 font-mono text-[9px] text-neutral-400 group-hover:text-white">
               <span>Fig. 1: S3 and CloudFront Integration</span>
               <span className="flex shrink-0 items-center gap-1">
                 Open full size <ArrowUpRight size={10} />
@@ -690,7 +690,7 @@ export default function S3CloudFrontImageGuide() {
                 href={`#step-${i + 1}`}
                 className="flex gap-2 hover:text-primary hover:font-semibold"
               >
-                <span className="text-neutral-500">
+                <span className="text-neutral-400">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <span className="truncate">{s.title}</span>
@@ -708,7 +708,7 @@ export default function S3CloudFrontImageGuide() {
         >
           <div className="hatch h-6 border-b border-white/10" />
           <div className="flex items-baseline gap-3 border-b border-white/10 px-4 py-3 sm:px-6">
-            <span className="font-mono text-[10px] text-neutral-500">
+            <span className="font-mono text-[10px] text-neutral-400">
               {String(i + 1).padStart(2, "0")}
             </span>
             <h2 className="min-w-0 font-serif text-[22px] leading-[1.15] text-white">

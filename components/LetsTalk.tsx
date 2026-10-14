@@ -106,7 +106,7 @@ export default function LetsTalk() {
                 type="button"
                 onClick={close}
                 aria-label="Close"
-                className="rounded p-1 text-neutral-500 hover:bg-white/10 hover:text-white"
+                className="rounded p-1 text-neutral-400 hover:bg-white/10 hover:text-white"
               >
                 <X size={16} />
               </button>

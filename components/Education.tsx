@@ -7,7 +7,7 @@ export default function Education() {
       <div className="divide-y divide-white/10">
         {education.map((e) => (
           <div key={e.t} className="px-4 py-5 sm:px-6">
-            <div className="flex items-center justify-between font-mono text-[9px] text-neutral-500">
+            <div className="flex items-center justify-between font-mono text-[9px] text-neutral-400">
               <span className="flex items-center gap-2">
                 <GraduationCap size={20} />
                 <span className="text-neutral-300 text-[10px]">{e.org}</span>

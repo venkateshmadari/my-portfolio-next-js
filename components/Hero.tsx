@@ -94,7 +94,7 @@
 //                   <Icon size={14} className="text-primary" />
 //                   {label}
 //                 </span>
-//                 <ArrowUpRight size={12} className="text-neutral-500" />
+//                 <ArrowUpRight size={12} className="text-neutral-400" />
 //               </a>
 //             ) : (
 //               <div
@@ -234,7 +234,7 @@ export default function Hero() {
 
               <ArrowUpRight
                 size={12}
-                className="text-neutral-500"
+                className="text-neutral-400"
               />
             </a>
           ))}

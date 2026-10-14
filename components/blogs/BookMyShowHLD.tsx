@@ -69,10 +69,10 @@ export default function BookMyShowHLD() {
       <header className="border-b border-white/10">
         <div className="hatch h-6 border-b border-white/10" />
         <div className="px-4 py-8 sm:px-6">
-          <a href="/blogs" className="inline-flex items-center gap-1.5 font-mono text-[10px] text-neutral-500 hover:text-white">
+          <a href="/blogs" className="inline-flex items-center gap-1.5 font-mono text-[10px] text-neutral-400 hover:text-white">
             <ArrowLeft size={12} /> All articles
           </a>
-          <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[10px] text-neutral-500">
+          <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[10px] text-neutral-400">
             <span>{META.date}</span>
             <span>·</span>
             <span>{META.read}</span>
@@ -91,7 +91,7 @@ export default function BookMyShowHLD() {
             <div className="relative aspect-[3/2] w-full overflow-hidden rounded-sm bg-neutral-900">
               <Image src={META.image} alt={META.imageAlt} fill sizes="(min-width: 720px) 640px, 100vw" priority className="object-contain" />
             </div>
-            <div className="mt-3 flex items-center justify-between gap-3 font-mono text-[9px] text-neutral-500 group-hover:text-white">
+            <div className="mt-3 flex items-center justify-between gap-3 font-mono text-[9px] text-neutral-400 group-hover:text-white">
               <span>Fig. 1: High-level design</span>
               <span className="flex shrink-0 items-center gap-1">Open full size <ArrowUpRight size={10} /></span>
             </div>
@@ -113,7 +113,7 @@ export default function BookMyShowHLD() {
       <Sec title="One Seat, Two Customers">
         <p>Imagine a blockbuster release. <B>Thousands of users</B> are trying to book tickets for the same show. Two of them see the same seat:</p>
         <div className="overflow-hidden rounded-md border border-white/10 bg-black/40">
-          <div className="border-b border-white/10 px-3 py-1.5 font-mono text-[9px] text-neutral-500">race condition</div>
+          <div className="border-b border-white/10 px-3 py-1.5 font-mono text-[9px] text-neutral-400">race condition</div>
           <pre className="overflow-x-auto p-3 font-mono text-[11px] leading-[19px] text-neutral-200">
 {`A1      → AVAILABLE
 
@@ -211,7 +211,7 @@ User B  → "Book A1"`}
           </a>
         </div>
         <div className="border-t border-white/10 px-4 py-4 sm:px-6">
-          <a href="/blogs" className="inline-flex items-center gap-1.5 font-mono text-[10px] text-neutral-500 hover:text-white">
+          <a href="/blogs" className="inline-flex items-center gap-1.5 font-mono text-[10px] text-neutral-400 hover:text-white">
             <ArrowLeft size={12} /> Back to all articles
           </a>
         </div>

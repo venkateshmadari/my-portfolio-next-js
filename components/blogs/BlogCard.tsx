@@ -25,7 +25,7 @@ export default function BlogCard({ blog }: { blog: Blog }) {
         </span>
       </div>
 
-      <div className="mt-3 flex items-center gap-1.5 font-mono text-[9px] text-neutral-500">
+      <div className="mt-3 flex items-center gap-1.5 font-mono text-[9px] text-neutral-400">
         <Clock size={10} />
         <span>{blog.minRead} min read</span>
       </div>
@@ -47,7 +47,7 @@ export default function BlogCard({ blog }: { blog: Blog }) {
           </span>
         ))}
         {extra > 0 && (
-          <span className="rounded border border-white/10 px-1.5 py-0.5 font-mono text-[8px] text-neutral-500">
+          <span className="rounded border border-white/10 px-1.5 py-0.5 font-mono text-[8px] text-neutral-400">
             +{extra}
           </span>
         )}

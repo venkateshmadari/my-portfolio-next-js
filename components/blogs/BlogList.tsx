@@ -8,18 +8,44 @@ export type Blog = {
   description: string;
   techStacks: string[];
   minRead: number;
-  link: string; 
+  link: string;
 };
 
 export const blogs: Blog[] = [
-    {
+  {
+    id: "how-uber-and-rapido-find-nearby-drivers",
+    name: "System Design & Geohashing",
+    image: "/how-uber-and-rapido-find-nearby-drivers.png",
+    title: "How Uber and Rapido Find Nearby Drivers",
+    description:
+      "How ride apps find nearby drivers in milliseconds: Geohash narrows the search, Redis stores live locations and Haversine filters by radius. Worked example included.",
+    techStacks: [
+      "Geohashing",
+      "Redis",
+      "Haversine",
+      "GEOSEARCH",
+      "Node.js",
+    ],
+    minRead: 13,
+    link: "/blogs/how-uber-and-rapido-find-nearby-drivers",
+  },
+  {
     id: "s3-cloudfront-image-upload-guide",
     name: "AWS",
     image: "/s3-cloudfront-image-upload.png",
-    title: "How to Upload Images to Amazon S3 and Serve Them with CloudFront Signed URLs in Node.js",
+    title:
+      "How to Upload Images to Amazon S3 and Serve Them with CloudFront Signed URLs in Node.js",
     description:
       "Store images in a private S3 bucket, optimize them with Sharp, and deliver them securely through CloudFront using short-lived signed URLs.",
-    techStacks: ["Amazon S3", "CloudFront", "IAM", "Node.js", "Multer", "Sharp", "Pem"],
+    techStacks: [
+      "Amazon S3",
+      "CloudFront",
+      "IAM",
+      "Node.js",
+      "Multer",
+      "Sharp",
+      "Pem",
+    ],
     minRead: 15,
     link: "/blogs/s3-cloudfront-image-upload-guide",
   },
@@ -45,11 +71,9 @@ export const blogs: Blog[] = [
     minRead: 4,
     link: "/blogs/book-my-show-hld",
   },
-
 ];
 
 export const MAX_TAGS = 4;
-
 
 export default function BlogList({ posts = blogs }: { posts?: Blog[] }) {
   return (
@@ -62,7 +86,7 @@ export default function BlogList({ posts = blogs }: { posts?: Blog[] }) {
         <h1 className="font-serif text-[22px] leading-none text-white">
           Field Notes
         </h1>
-        <span className="font-mono text-[9px] text-neutral-500">
+        <span className="font-mono text-[9px] text-neutral-400">
           {posts.length} {posts.length === 1 ? "article" : "articles"}
         </span>
       </div>
@@ -77,7 +101,7 @@ export default function BlogList({ posts = blogs }: { posts?: Blog[] }) {
           ))}
         </div>
       ) : (
-        <p className="px-4 py-12 text-center font-mono text-[10px] text-neutral-500 sm:px-6">
+        <p className="px-4 py-12 text-center font-mono text-[10px] text-neutral-400 sm:px-6">
           Nothing published yet. Check back soon.
         </p>
       )}

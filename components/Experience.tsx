@@ -7,9 +7,9 @@ export default function Experience() {
         <div className="flex justify-between text-[12px]">
           <p>
             <b className="text-white">Full-Stack Developer</b>{" "}
-            <span className="text-neutral-500">· Spack Digi Solutions</span>
+            <span className="text-neutral-400">· Spack Digi Solutions</span>
           </p>
-          <span className="font-mono text-[9px] text-neutral-500">
+          <span className="font-mono text-[9px] text-neutral-400">
             May 2024 · Present
           </span>
         </div>

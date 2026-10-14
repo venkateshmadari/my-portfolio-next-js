@@ -435,7 +435,7 @@ function Code({ v, lang }: { v: string; lang?: string }) {
       data-code
       className="min-w-0 overflow-hidden rounded-md border border-white/10 bg-black/40"
     >
-      <div className="flex items-center justify-between gap-3 border-b border-white/10 px-3 py-1.5 font-mono text-[9px] text-neutral-500">
+      <div className="flex items-center justify-between gap-3 border-b border-white/10 px-3 py-1.5 font-mono text-[9px] text-neutral-400">
         <span className="min-w-0 truncate">{lang ?? "bash"}</span>
         <button
           type="button"
@@ -555,7 +555,7 @@ function Blocks({ items }: { items: Block[] }) {
               >
                 <table className="w-full min-w-[460px] border-collapse text-left text-[11px] leading-[17px]">
                   <thead>
-                    <tr className="border-b border-white/10 bg-white/[.03] font-mono text-[9px] uppercase tracking-widest text-neutral-500">
+                    <tr className="border-b border-white/10 bg-white/[.03] font-mono text-[9px] uppercase tracking-widest text-neutral-400">
                       {b.head.map((h) => (
                         <th key={h} className="px-3 py-2 font-normal">
                           {h}
@@ -614,11 +614,11 @@ export default function LaunchEC2Instance() {
         <div className="px-4 py-8 sm:px-6">
           <a
             href="/blogs"
-            className="inline-flex items-center gap-1.5 font-mono text-[10px] text-neutral-500 hover:text-white"
+            className="inline-flex items-center gap-1.5 font-mono text-[10px] text-neutral-400 hover:text-white"
           >
             <ArrowLeft size={12} /> All articles
           </a>
-          <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[10px] text-neutral-500">
+          <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[10px] text-neutral-400">
             <time dateTime={SEO.date}>{SEO.dateLabel}</time>
             <span>·</span>
             <span>{SEO.read}</span>
@@ -631,7 +631,7 @@ export default function LaunchEC2Instance() {
           </p>
         </div>
         <div className="border-t border-white/10 px-4 py-5 sm:px-6">
-          <p className="font-mono text-[9px] uppercase tracking-widest text-neutral-500">
+          <p className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
             What you'll use
           </p>
           <div className="mt-3 flex flex-wrap gap-2">
@@ -661,7 +661,7 @@ export default function LaunchEC2Instance() {
                 href={`#step-${i + 1}`}
                 className="flex gap-2 hover:text-primary hover:font-semibold"
               >
-                <span className="text-neutral-500">
+                <span className="text-neutral-400">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <span className="truncate">{s.title}</span>
@@ -679,7 +679,7 @@ export default function LaunchEC2Instance() {
         >
           <div className="hatch h-6 border-b border-white/10" />
           <div className="flex items-baseline gap-3 border-b border-white/10 px-4 py-3 sm:px-6">
-            <span className="font-mono text-[10px] text-neutral-500">
+            <span className="font-mono text-[10px] text-neutral-400">
               {String(i + 1).padStart(2, "0")}
             </span>
             <h2 className="min-w-0 font-serif text-[22px] leading-[1.15] text-white">
@@ -696,7 +696,7 @@ export default function LaunchEC2Instance() {
         <div className="hatch h-6 border-b border-white/10" />
         <div className="flex flex-col items-start justify-between gap-4 px-4 py-6 sm:flex-row sm:items-center sm:px-6">
           <div className="min-w-0">
-            <p className="font-mono text-[9px] uppercase tracking-widest text-neutral-500">
+            <p className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
               Next article
             </p>
             <p className="mt-2 font-serif text-[20px] leading-[1.15] text-white">
@@ -713,7 +713,7 @@ export default function LaunchEC2Instance() {
         <div className="border-t border-white/10 px-4 py-4 sm:px-6">
           <a
             href="/blogs"
-            className="inline-flex items-center gap-1.5 font-mono text-[10px] text-neutral-500 hover:text-white"
+            className="inline-flex items-center gap-1.5 font-mono text-[10px] text-neutral-400 hover:text-white"
           >
             <ArrowLeft size={12} /> Back to all articles
           </a>

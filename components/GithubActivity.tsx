@@ -71,7 +71,7 @@
 //           href={`https://github.com/${USER}`}
 //           target="_blank"
 //           rel="noreferrer"
-//           className="font-mono text-[9px] text-neutral-500"
+//           className="font-mono text-[9px] text-neutral-400"
 //         >
 //           @{USER} ↗
 //         </a>
@@ -80,7 +80,7 @@
 //       <div className="overflow-x-auto p-4 sm:px-6 flex items-center justify-center">
 //         {data ? (
 //           <div style={{ width: "max-content" }}>
-//             <div className="relative mb-1 h-3 font-mono text-[8px] text-neutral-500">
+//             <div className="relative mb-1 h-3 font-mono text-[8px] text-neutral-400">
 //               {labels.map(
 //                 (l, i) =>
 //                   l && (
@@ -113,7 +113,7 @@
 //             </div>
 //           </div>
 //         ) : (
-//           <p className="py-6 text-center font-mono text-[10px] text-neutral-500">
+//           <p className="py-6 text-center font-mono text-[10px] text-neutral-400">
 //             Live activity unavailable right now.{" "}
 //             <a className="underline" href={`https://github.com/${USER}`}>
 //               View on GitHub ↗
@@ -227,7 +227,7 @@ export function ActivityGrid({ data }: { data: Activity }) {
           href={`https://github.com/${USER}`}
           target="_blank"
           rel="noreferrer"
-          className="font-mono text-[9px] text-neutral-500"
+          className="font-mono text-[9px] text-neutral-400"
         >
           @{USER} ↗
         </a>
@@ -239,7 +239,7 @@ export function ActivityGrid({ data }: { data: Activity }) {
           {data ? (
             <div className="w-max">
               {/* Month labels */}
-              <div className="relative mb-1 h-3 font-mono text-[8px] text-neutral-500">
+              <div className="relative mb-1 h-3 font-mono text-[8px] text-neutral-400">
                 {labels.map(
                   (l, i) =>
                     l && (
@@ -294,7 +294,7 @@ export function ActivityGrid({ data }: { data: Activity }) {
               </div>
             </div>
           ) : (
-            <p className="py-6 text-center font-mono text-[10px] text-neutral-500">
+            <p className="py-6 text-center font-mono text-[10px] text-neutral-400">
               Live activity unavailable right now.{" "}
               <a
                 className="underline"
