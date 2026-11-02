@@ -81,10 +81,10 @@ export default function Header() {
               <button
                 key={item.id}
                 onClick={() => handleNavigation(item.id)}
-                className={`hidden cursor-pointer rounded px-2 py-1 transition-colors sm:block ${
+                className={`hidden cursor-pointer rounded text-xs font-semibold leading-relaxed px-2 py-1 transition-colors sm:block ${
                   isActive
                     ? "bg-white/10 text-white"
-                    : "text-neutral-400 hover:text-white"
+                    : "text-neutral-300 hover:text-white"
                 }`}
               >
                 {item.label}
@@ -95,10 +95,10 @@ export default function Header() {
           {/* Blogs */}
           <Link
             href="/blogs"
-            className={`rounded px-2 py-1 transition-colors ${
+            className={`rounded px-2 py-1 transition-colors text-xs font-semibold leading-relaxed ${
               pathname.startsWith("/blogs")
                 ? "bg-white/10 text-white"
-                : "text-neutral-400 hover:text-white"
+                : "text-neutral-300 hover:text-white"
             }`}
           >
             Blogs

@@ -187,7 +187,7 @@ export default function Hero() {
       </div>
 
       <Section id="about" title="Hello, World" right={null}>
-        <ul className="space-y-4 px-4 py-5 text-[13px] leading-[20px] text-neutral-300 sm:px-6">
+        <ul className="space-y-4 px-4 py-5 md:text-base text-sm font-medium leading-relaxed text-neutral-300 sm:px-6">
           {bullets.map((b) => (
             <li key={b} className="flex gap-3">
               <span className="mt-2 size-1 shrink-0 rounded-full bg-neutral-500" />
@@ -197,11 +197,11 @@ export default function Hero() {
         </ul>
 
         <div className="mx-4 mb-6 rounded-md border border-white/10 bg-white/[.02] p-4 sm:mx-6">
-          <p className="mb-3 font-mono text-[10px] font-bold tracking-widest text-neutral-300">
+          <p className="mb-3 font-mono text-xs font-bold tracking-widest text-neutral-300">
             DEVELOPER SNAPSHOT
           </p>
 
-          <div className="grid grid-cols-1 gap-2 font-mono text-[11px] text-neutral-400 sm:grid-cols-2">
+          <div className="grid gap-2 md:text-sm text-xs font-medium leading-relaxed text-neutral-400 grid-cols-2">
             {[
               "Scaling SaaS systems.",
               "Deploying on AWS.",
@@ -218,7 +218,7 @@ export default function Hero() {
       </Section>
 
       <Section id="contact" title="Let's Connect">
-        <div className="grid grid-cols-2 divide-x divide-white/10 text-[12px] text-neutral-300 sm:grid-cols-4">
+        <div className="grid grid-cols-2 divide-x divide-white/10 md:text-sm text-xs font-medium leading-relaxed text-neutral-300 sm:grid-cols-4">
           {links.map(({ Icon, label, href }) => (
             <a
               key={label}

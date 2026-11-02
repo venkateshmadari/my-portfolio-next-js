@@ -20,7 +20,7 @@ export default function Page() {
         <HomeBlogs/>
         <TechStack />
         <Projects />
-        <Education />
+        {/* <Education /> */}
         <GithubActivity />
         <VisitorCounter />
       </main>

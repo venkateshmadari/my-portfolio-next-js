@@ -16,9 +16,7 @@ export default function LocationTime() {
           minute: "2-digit",
           second: "2-digit",
           hour12: true,
-        }) +
-          "." +
-          String(now.getMilliseconds()).padStart(3, "0"),
+        }) 
       );
     };
 
@@ -30,8 +28,6 @@ export default function LocationTime() {
   }, []);
 
   return (
-    <p className="mt-1 font-mono text-[9px] text-neutral-400">
-      <span className="text-primary">■</span> Hyderabad, India · {time}
-    </p>
+    <p className="mt-1 text-xs text-neutral-400">Hyderabad, India · {time}</p>
   );
 }

@@ -128,6 +128,7 @@
 // export default async function GithubActivity() {
 //   return <ActivityGrid data={await getActivity()} />;
 // }
+import { ArrowUpRight } from "lucide-react";
 import Section from "./Section";
 
 const USER = "venkateshmadari";
@@ -179,9 +180,7 @@ export async function getActivity(): Promise<Activity> {
     const days: Day[] = json.contributions;
 
     return {
-      total:
-        json.total?.lastYear ??
-        days.reduce((a, d) => a + d.count, 0),
+      total: json.total?.lastYear ?? days.reduce((a, d) => a + d.count, 0),
       days,
     };
   } catch {
@@ -196,27 +195,15 @@ export function ActivityGrid({ data }: { data: Activity }) {
     ? new Date(days[0].date + "T00:00:00Z").getUTCDay()
     : 0;
 
-  const cells: (Day | null)[] = [
-    ...Array(pad).fill(null),
-    ...days,
-  ];
+  const cells: (Day | null)[] = [...Array(pad).fill(null), ...days];
 
   const weeks = Math.ceil(cells.length / 7);
 
-  const labels = Array.from(
-    { length: weeks },
-    (_, w) => {
-      const d = cells
-        .slice(w * 7, w * 7 + 7)
-        .find(Boolean);
+  const labels = Array.from({ length: weeks }, (_, w) => {
+    const d = cells.slice(w * 7, w * 7 + 7).find(Boolean);
 
-      return d
-        ? new Date(d.date + "T00:00:00Z").getUTCMonth()
-        : -1;
-    },
-  ).map((m, i, a) =>
-    m !== -1 && m !== a[i - 1] ? MONTHS[m] : "",
-  );
+    return d ? new Date(d.date + "T00:00:00Z").getUTCMonth() : -1;
+  }).map((m, i, a) => (m !== -1 && m !== a[i - 1] ? MONTHS[m] : ""));
 
   return (
     <Section
@@ -227,9 +214,9 @@ export function ActivityGrid({ data }: { data: Activity }) {
           href={`https://github.com/${USER}`}
           target="_blank"
           rel="noreferrer"
-          className="font-mono text-[9px] text-neutral-400"
+          className="text-xs font-semibold flex items-center gap-1 text-neutral-400 transition-colors hover:text-primary"
         >
-          @{USER} ↗
+          @{USER} <ArrowUpRight size={14} />
         </a>
       }
     >
@@ -260,14 +247,10 @@ export function ActivityGrid({ data }: { data: Activity }) {
                   <i
                     key={i}
                     title={
-                      d
-                        ? `${d.count} contributions on ${d.date}`
-                        : undefined
+                      d ? `${d.count} contributions on ${d.date}` : undefined
                     }
                     className={`size-[7px] shrink-0 rounded-[1px] ${
-                      d
-                        ? shade[d.level]
-                        : "bg-transparent"
+                      d ? shade[d.level] : "bg-transparent"
                     }`}
                   />
                 ))}
@@ -275,20 +258,16 @@ export function ActivityGrid({ data }: { data: Activity }) {
 
               {/* Bottom information */}
               <div className="mt-3 flex items-center justify-between gap-6 whitespace-nowrap font-mono text-[10px] text-neutral-400">
-                <span>
-                  {data.total} contributions in the last year
-                </span>
+                <span>{data.total} contributions in the last year</span>
 
                 <span className="flex items-center gap-1">
                   Less
-
                   {shade.map((s) => (
                     <i
                       key={s}
                       className={`size-[7px] shrink-0 rounded-[1px] ${s}`}
                     />
                   ))}
-
                   More
                 </span>
               </div>
@@ -296,10 +275,7 @@ export function ActivityGrid({ data }: { data: Activity }) {
           ) : (
             <p className="py-6 text-center font-mono text-[10px] text-neutral-400">
               Live activity unavailable right now.{" "}
-              <a
-                className="underline"
-                href={`https://github.com/${USER}`}
-              >
+              <a className="underline" href={`https://github.com/${USER}`}>
                 View on GitHub ↗
               </a>
             </p>

@@ -3,7 +3,6 @@ import Link from "next/link";
 import { ArrowUpRight, Clock } from "lucide-react";
 import { Blog, MAX_TAGS } from "./BlogList";
 
-
 export default function BlogCard({ blog }: { blog: Blog }) {
   const extra = blog.techStacks.length - MAX_TAGS;
   return (
@@ -20,20 +19,20 @@ export default function BlogCard({ blog }: { blog: Blog }) {
           loading="eager"
           className="object-contain transition-transform duration-500 group-hover:scale-[1.03]"
         />
-        <span className="absolute left-2 top-2 rounded bg-black/70 px-1.5 py-0.5 font-mono text-[8px] uppercase tracking-widest text-neutral-200 backdrop-blur">
+        <span className="absolute left-2 top-2 rounded bg-primary text-black px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-widest backdrop-blur">
           {blog.name}
         </span>
       </div>
 
-      <div className="mt-3 flex items-center gap-1.5 font-mono text-[9px] text-neutral-400">
+      <div className="mt-3 flex items-center gap-1.5 text-xs text-neutral-300">
         <Clock size={10} />
         <span>{blog.minRead} min read</span>
       </div>
 
-      <h3 className="mt-1.5 break-words font-serif text-[19px] leading-[1.2] text-white">
+      <h3 className="mt-1.5 wrap-break-words font-semibold tracking-wide font-serif text-[19px] leading-[1.2] text-white">
         {blog.title}
       </h3>
-      <p className="mt-2 line-clamp-3 text-[11px] leading-[17px] text-neutral-400">
+      <p className="mt-2 line-clamp-3 text-sm font-medium leading-relaxed text-neutral-300">
         {blog.description}
       </p>
 
@@ -41,19 +40,19 @@ export default function BlogCard({ blog }: { blog: Blog }) {
         {blog.techStacks.slice(0, MAX_TAGS).map((t) => (
           <span
             key={t}
-            className="rounded border border-white/10 px-1.5 py-0.5 font-mono text-[8px] text-neutral-400"
+            className="rounded font-medium cursor-pointer hover:bg-primary/10 hover:text-primary transition-all duration-200 ease-in-out border border-white/10 px-1.5 py-0.5 text-xs text-neutral-300"
           >
             {t}
           </span>
         ))}
         {extra > 0 && (
-          <span className="rounded border border-white/10 px-1.5 py-0.5 font-mono text-[8px] text-neutral-400">
+          <span className="rounded cursor-pointer hover:bg-primary/10 hover:text-primary transition-all duration-200 ease-in-out border border-white/10 px-1.5 py-0.5 text-xs text-neutral-300">
             +{extra}
           </span>
         )}
       </div>
 
-      <div className="mt-3 flex items-center justify-between border-t border-white/10 pt-3 font-mono text-[10px] text-neutral-400 group-hover:text-white">
+      <div className="mt-3 flex items-center justify-between border-t border-white/10 pt-3 text-xs text-neutral-400 group-hover:text-white">
         <span>Read article</span>
         <ArrowUpRight
           size={12}

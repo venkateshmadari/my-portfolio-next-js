@@ -28,18 +28,19 @@ export default function Projects() {
             key={p.name}
             className="flex flex-col rounded-md border border-white/10 bg-white/[.02] p-3"
           >
-            <div className="relative h-[110px] overflow-hidden rounded-sm bg-neutral-800">
+            <div className="relative aspect-video overflow-hidden rounded-sm bg-neutral-800">
               <Image
                 src={p.imagePath}
                 alt={p.name}
                 fill
-                sizes="(max-width: 640px) 100vw, 50vw"
-                className="object-cover"
+                sizes="(min-width: 640px) 340px, 100vw"
+                loading="eager"
+                className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
               />
 
-              <span className="absolute left-2 top-2 rounded bg-primary/10 px-1.5 py-0.5 font-mono text-[8px] text-primary">
-                ● {p.tag}
-              </span>
+              {/* <span className="absolute left-2 top-2 rounded bg-primary text-black px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest backdrop-blur">
+                {p.tag}
+              </span> */}
 
               {p.featured && (
                 <span className="absolute right-2 top-2 rounded bg-amber-900/70 px-1.5 py-0.5 font-mono text-[8px] text-amber-300">
@@ -48,31 +49,33 @@ export default function Projects() {
               )}
             </div>
             <div className="mt-3 flex items-baseline justify-between">
-              <h3 className="text-[12px] font-semibold text-white">{p.name}</h3>
+              <h3 className="mt-1.5 wrap-break-words font-semibold tracking-wide font-serif text-[19px] leading-[1.2] text-white">
+                {p.name}
+              </h3>{" "}
             </div>
-            <p className="mt-1 line-clamp-4 text-[11px] leading-[18px] text-neutral-400">
+            <p className="mt-1 line-clamp-4 text-sm font-medium leading-relaxed text-neutral-300">
               {p.desc}
             </p>
             <div className="mt-3 flex flex-1 flex-wrap content-start gap-1">
               {p.stack.map((s) => (
                 <span
                   key={s}
-                  className="rounded border border-white/10 px-1.5 py-0.5 font-mono text-[10px] text-neutral-400"
+                  className="rounded cursor-pointer font-medium hover:bg-primary/10 hover:text-primary transition-all duration-200 ease-in-out border border-white/10 px-1.5 py-0.5 text-xs text-neutral-300"
                 >
                   {s}
                 </span>
               ))}
             </div>
-            <div className="mt-2 flex justify-end gap-2 text-neutral-400">
+            <div className="mt-2.5 flex justify-end gap-2 text-neutral-400">
               {p.website ? (
                 <Link href={p.website} target="_blank">
-                  <Globe size={11} />
+                  <Globe size={14} className="hover:text-primary" />
                 </Link>
               ) : null}
 
               {"github" in p && p.github ? (
                 <a href={p.github} target="_blank" rel="noreferrer">
-                  <Github size={11} />
+                  <Github size={14} className="hover:text-primary" />
                 </a>
               ) : null}
             </div>

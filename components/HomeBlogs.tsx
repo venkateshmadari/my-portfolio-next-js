@@ -14,7 +14,7 @@ export default function HomeBlogs() {
       right={
         <Link
           href="/blogs"
-          className="font-mono text-[10px] flex items-center gap-2 text-neutral-400 transition-colors hover:text-primary"
+          className="text-xs font-semibold flex items-center gap-2 text-neutral-400 transition-colors hover:text-primary"
         >
           View all articles
           <ArrowUpRight
