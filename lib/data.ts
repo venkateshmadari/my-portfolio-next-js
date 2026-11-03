@@ -1,5 +1,22 @@
 export const projects = [
   {
+    name: "Custom AI Chatbot with RAG",
+    tag: "FULL-STACK",
+    desc: "An AI-powered RAG chatbot powered by Google Gemini, built with Next.js, LangChain, Prisma, and MySQL. Companies can customize their chatbot, index website pages, add custom FAQs, and deliver AI-generated answers based on their own website content and knowledge base.",
+    stack: [
+      "Puppeteer",
+      "langchain",
+      "Gemini AI",
+      "Node.js",
+      "Express.js",
+      "Prisma",
+      "MySQL",
+    ],
+    featured: false,
+    github: "https://github.com/venkateshmadari/Custom-AI-Chatbot-with-RAG",
+    imagePath: "/AI-Chatbot-RAG.png",
+  },
+  {
     name: "Hospital Appointment Management System",
     tag: "FULL-STACK",
     desc: "A full-stack hospital appointment platform with automated doctor scheduling, patient authentication, and seamless booking workflows. Secured with a scalable JWT architecture and PBAC for role-specific dashboards.",
@@ -19,23 +36,7 @@ export const projects = [
     website: "https://hospital-management-website-nine.vercel.app/",
     imagePath: "/project-1.png",
   },
-  {
-    name: "Custom AI Chatbot with RAG",
-    tag: "FULL-STACK",
-    desc: "An AI-powered RAG chatbot powered by Google Gemini, built with Next.js, LangChain, Prisma, and MySQL. Companies can customize their chatbot, index website pages, add custom FAQs, and deliver AI-generated answers based on their own website content and knowledge base.",
-    stack: [
-      "Puppeteer",
-      "langchain",
-      "Gemini AI",
-      "Node.js",
-      "Express.js",
-      "Prisma",
-      "MySQL",
-    ],
-    featured: false,
-    github: "https://github.com/venkateshmadari/Custom-AI-Chatbot-with-RAG",
-    imagePath: "/AI-Chatbot-RAG.png",
-  },
+
   // {
   //   name: "Production SaaS Platform",
   //   tag: "FRONTEND",

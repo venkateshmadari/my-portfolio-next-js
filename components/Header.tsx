@@ -67,7 +67,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-20 border-b border-white/10 bg-[#0a0a0a]/90 backdrop-blur">
       <div className="mx-auto flex h-11 max-w-[720px] items-center justify-between border-x border-white/10 px-4 sm:px-6">
-        <Link href="/" className="font-serif text-base tracking-wider select-none text-white">
+        <Link href="/" className="font-serif text-base font-medium tracking-wider select-none text-white">
           Venkatesh
           <span className="ml-1 text-xs">♡</span>
         </Link>

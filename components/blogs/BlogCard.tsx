@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Clock } from "lucide-react";
 import { Blog, MAX_TAGS } from "./BlogList";
+import Tags from "../common/Tags";
 
 export default function BlogCard({ blog }: { blog: Blog }) {
   const extra = blog.techStacks.length - MAX_TAGS;
@@ -38,12 +39,7 @@ export default function BlogCard({ blog }: { blog: Blog }) {
 
       <div className="mt-3 flex flex-1 flex-wrap content-start gap-1">
         {blog.techStacks.slice(0, MAX_TAGS).map((t) => (
-          <span
-            key={t}
-            className="rounded font-medium cursor-pointer hover:bg-primary/10 hover:text-primary transition-all duration-200 ease-in-out border border-white/10 px-1.5 py-0.5 text-xs text-neutral-300"
-          >
-            {t}
-          </span>
+          <Tags name={t} key={t} />
         ))}
         {extra > 0 && (
           <span className="rounded cursor-pointer hover:bg-primary/10 hover:text-primary transition-all duration-200 ease-in-out border border-white/10 px-1.5 py-0.5 text-xs text-neutral-300">
@@ -53,7 +49,7 @@ export default function BlogCard({ blog }: { blog: Blog }) {
       </div>
 
       <div className="mt-3 flex items-center justify-between border-t border-white/10 pt-3 text-xs text-neutral-400 group-hover:text-white">
-        <span>Read article</span>
+        <span>Read blog</span>
         <ArrowUpRight
           size={12}
           className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"

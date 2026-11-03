@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import {
   ArrowDown,
@@ -9,6 +10,7 @@ import {
   Car,
   Check,
   Copy,
+  Dot,
   Flag,
   Hash,
   Map as MapIcon,
@@ -19,10 +21,11 @@ import {
   Zap,
 } from "lucide-react";
 import Image from "next/image";
+import RelatedBlog from "../common/RelatedBlog";
+import Tags from "../common/Tags";
+import ImageViewer from "../common/ImageViewer";
 
-/* ───────────── SEO / meta ─────────────
-   Keep these strings in sync with `metadata` in app/blogs/<slug>/page.tsx
-   (a "use client" file can't export metadata). */
+/* ───────────── SEO / meta ───────────── */
 const SEO = {
   title: "How Uber and Rapido Find Nearby Drivers: Geohash, Redis & Haversine",
   description:
@@ -73,7 +76,7 @@ const ICONS = {
   flag: Flag,
 };
 
-/* ───────────── Geohash worked example (computed, so the tables can't drift) ───────────── */
+/* ───────────── Geohash worked example ───────────── */
 const B32 = "0123456789bcdefghjkmnpqrstuvwxyz";
 const PICKUP_LAT = 17.400441666657823;
 const PICKUP_LON = 78.56072868878287;
@@ -83,6 +86,7 @@ function geohashSteps(lat: number, lon: number, bitCount: number) {
     lonMax = 180,
     latMin = -90,
     latMax = 90;
+
   const rows: {
     step: number;
     axis: string;
@@ -91,6 +95,7 @@ function geohashSteps(lat: number, lon: number, bitCount: number) {
     cmp: string;
     bit: 0 | 1;
   }[] = [];
+
   for (let i = 0; i < bitCount; i++) {
     const isLon = i % 2 === 0;
     const value = isLon ? lon : lat;
@@ -98,6 +103,7 @@ function geohashSteps(lat: number, lon: number, bitCount: number) {
     const hi = isLon ? lonMax : latMax;
     const mid = (lo + hi) / 2;
     const bit: 0 | 1 = value >= mid ? 1 : 0;
+
     rows.push({
       step: i + 1,
       axis: isLon ? "Longitude" : "Latitude",
@@ -106,24 +112,29 @@ function geohashSteps(lat: number, lon: number, bitCount: number) {
       cmp: `${value.toFixed(4)} ${bit ? "≥" : "<"} ${mid}`,
       bit,
     });
+
     if (isLon) {
       if (bit) lonMin = mid;
       else lonMax = mid;
     } else if (bit) latMin = mid;
     else latMax = mid;
   }
+
   return rows;
 }
 
 const STEP_ROWS = geohashSteps(PICKUP_LAT, PICKUP_LON, 30);
 const BIT_STRING = STEP_ROWS.map((r) => r.bit).join("");
+
 const GROUPS = Array.from({ length: 6 }, (_, k) => {
   const bits = BIT_STRING.slice(k * 5, k * 5 + 5);
   const parts = [16, 8, 4, 2, 1].filter((_, i) => bits[i] === "1");
   const dec = parts.reduce((a, b) => a + b, 0);
+
   return { bits, calc: parts.join(" + "), dec, ch: B32[dec] };
 });
-const HASH = GROUPS.map((g) => g.ch).join(""); // "tepfgx"
+
+const HASH = GROUPS.map((g) => g.ch).join("");
 
 /* ───────────── Code samples ───────────── */
 const REDIS_CMDS = `# longitude first, then latitude
@@ -672,13 +683,14 @@ const rich = (s: string) =>
   s.split(/(`[^`]+`)/g).map((p, i) => {
     if (p.length > 1 && p.startsWith("`") && p.endsWith("`")) {
       const text = p.slice(1, -1);
+
       return /^https?:\/\//.test(text) ? (
         <a
           key={i}
           href={text}
           target="_blank"
           rel="noreferrer"
-          className="break-all rounded bg-white/10 px-1 py-0.5 font-mono text-[11px] text-white underline underline-offset-2 hover:bg-white/20"
+          className="break-all rounded bg-white/10 px-1 py-0.5 font-mono text-[11px] text-white underline underline-offset-2 transition-colors hover:bg-white/20"
         >
           {text}
         </a>
@@ -691,11 +703,13 @@ const rich = (s: string) =>
         </code>
       );
     }
+
     return <span key={i}>{p}</span>;
   });
 
 function Code({ v, lang }: { v: string; lang?: string }) {
   const [copied, setCopied] = useState(false);
+
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(v);
@@ -703,24 +717,27 @@ function Code({ v, lang }: { v: string; lang?: string }) {
       setTimeout(() => setCopied(false), 1800);
     } catch {}
   };
+
   return (
     <div
       data-code
       className="min-w-0 overflow-hidden rounded-md border border-white/10 bg-black/40"
     >
-      <div className="flex items-center justify-between gap-3 border-b border-white/10 px-3 py-1.5 font-mono text-[9px] text-neutral-400">
+      <div className="flex items-center justify-between gap-3 border-b border-white/10 px-3 py-1.5 font-mono text-[10px] text-neutral-400">
         <span className="min-w-0 truncate">{lang ?? "bash"}</span>
+
         <button
           type="button"
           data-copy
           onClick={copy}
-          className="flex shrink-0 items-center gap-1 hover:text-white"
+          className="flex shrink-0 items-center gap-1 transition-colors hover:text-white"
         >
           {copied ? <Check size={10} /> : <Copy size={10} />}
           <span data-copy-label>{copied ? "Copied" : "Copy"}</span>
         </button>
       </div>
-      <pre className="overflow-x-auto p-3 font-mono text-[11px] leading-[18px] text-neutral-200">
+
+      <pre className="overflow-x-auto p-3 font-mono text-[12px] leading-[19px] text-neutral-200">
         <code>{v}</code>
       </pre>
     </div>
@@ -735,46 +752,56 @@ const NOTE = {
 
 function CellView({ c }: { c: Cell }) {
   if (typeof c === "string") return <>{c}</>;
-  if (c.tone === "ok")
+
+  if (c.tone === "ok") {
     return (
       <span className="inline-flex items-center gap-1 text-emerald-400">
         <Check size={11} />
         {c.v}
       </span>
     );
-  if (c.tone === "no")
+  }
+
+  if (c.tone === "no") {
     return (
       <span className="inline-flex items-center gap-1 text-rose-400">
         <X size={11} />
         {c.v}
       </span>
     );
+  }
+
   return <span className="font-bold text-white">{c.v}</span>;
 }
 
 function Blocks({ items }: { items: Block[] }) {
   return (
-    <div className="min-w-0 space-y-4">
+    <div className="min-w-0 space-y-4 text-sm font-medium leading-relaxed text-neutral-300 md:text-base">
       {items.map((b, i) => {
         switch (b.t) {
           case "p":
             return <p key={i}>{rich(b.v)}</p>;
+
           case "h":
             return (
               <h3
                 key={i}
-                className="pt-2 font-mono text-[10px] font-bold uppercase tracking-widest text-neutral-200"
+                className="pt-2 font-serif text-[18px] font-semibold leading-[1.2] text-white"
               >
                 {b.v}
               </h3>
             );
+
           case "ul":
           case "ol": {
             const List = b.t;
+
             return (
               <List
                 key={i}
-                className={`space-y-2 pl-5 ${b.t === "ol" ? "list-decimal" : "list-disc"} marker:text-neutral-600`}
+                className={`space-y-2 pl-5 marker:text-neutral-500 ${
+                  b.t === "ol" ? "list-decimal" : "list-disc"
+                }`}
               >
                 {b.v.map((li, j) => (
                   <li key={j}>{rich(li)}</li>
@@ -782,17 +809,20 @@ function Blocks({ items }: { items: Block[] }) {
               </List>
             );
           }
+
           case "code":
             return <Code key={i} v={b.v} lang={b.lang} />;
+
           case "note": {
             const [label, color] = NOTE[b.kind ?? "note"];
+
             return (
               <div
                 key={i}
-                className="rounded-md border border-white/10 bg-white/[.02] px-3 py-2.5 text-[12px] leading-[19px] text-neutral-400"
+                className="rounded-md border border-white/10 bg-white/[.02] px-4 py-3 text-sm font-medium leading-relaxed text-neutral-300 md:text-base"
               >
                 <span
-                  className={`mr-2 font-mono text-[9px] font-bold tracking-widest ${color}`}
+                  className={`mr-2 font-mono text-[10px] font-bold tracking-widest ${color}`}
                 >
                   {label}
                 </span>
@@ -800,15 +830,17 @@ function Blocks({ items }: { items: Block[] }) {
               </div>
             );
           }
+
           case "quote":
             return (
               <div
                 key={i}
-                className="rounded-md border border-white/10 bg-white/[.02] px-4 py-4 font-serif text-[18px] leading-[1.3] text-white"
+                className="rounded-md border border-primary/50 bg-primary/5 px-4 py-4 text-base font-medium leading-relaxed tracking-wide text-white"
               >
                 {b.v}
               </div>
             );
+
           case "kv":
             return (
               <dl
@@ -820,16 +852,17 @@ function Blocks({ items }: { items: Block[] }) {
                     key={k}
                     className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 px-3 py-2.5"
                   >
-                    <dt className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
+                    <dt className="font-mono text-[10px] uppercase tracking-widest text-neutral-400">
                       {k}
                     </dt>
-                    <dd className="min-w-0 break-words font-mono text-[12px] text-white">
+                    <dd className="min-w-0 break-words font-mono text-[13px] text-white">
                       {v}
                     </dd>
                   </div>
                 ))}
               </dl>
             );
+
           case "table":
             return (
               <div
@@ -837,18 +870,19 @@ function Blocks({ items }: { items: Block[] }) {
                 className="min-w-0 overflow-x-auto rounded-md border border-white/10"
               >
                 <table
-                  className="w-full border-collapse text-left text-[11px] leading-[17px]"
+                  className="w-full border-collapse text-left text-sm leading-relaxed md:text-base"
                   style={{ minWidth: b.minW ?? 460 }}
                 >
                   <thead>
-                    <tr className="border-b border-white/10 bg-white/[.03] font-mono text-[9px] uppercase tracking-widest text-neutral-400">
+                    <tr className="border-b border-white/10 bg-white/[.03] font-mono text-[10px] uppercase tracking-widest text-neutral-400">
                       {b.head.map((h) => (
-                        <th key={h} className="px-3 py-2 font-normal">
+                        <th key={h} className="px-3 py-2 font-medium">
                           {h}
                         </th>
                       ))}
                     </tr>
                   </thead>
+
                   <tbody>
                     {b.rows.map((r, ri) => (
                       <tr
@@ -858,7 +892,11 @@ function Blocks({ items }: { items: Block[] }) {
                         {r.map((cell, j) => (
                           <td
                             key={j}
-                            className={`px-3 py-2.5 ${j === 0 ? "font-mono text-white" : "text-neutral-400"}`}
+                            className={`px-3 py-2.5 ${
+                              j === 0
+                                ? "font-semibold text-white"
+                                : "font-medium text-neutral-300"
+                            }`}
                           >
                             <CellView c={cell} />
                           </td>
@@ -869,38 +907,43 @@ function Blocks({ items }: { items: Block[] }) {
                 </table>
               </div>
             );
+
           case "flow":
             return (
               <ol key={i} className="min-w-0">
                 {b.items.map((it, j) => {
                   const Icon = it.icon ? ICONS[it.icon] : null;
+
                   return (
                     <li key={j}>
-                      <div className="flex items-start gap-3 rounded-md border border-white/10 bg-white/[.02] px-3 py-2.5">
+                      <div className="flex items-start gap-3 rounded-md border border-white/10 bg-white/[.02] px-3 py-3">
                         {Icon ? (
                           <Icon
-                            size={14}
-                            className="mt-0.5 shrink-0 text-neutral-400"
+                            size={15}
+                            className="mt-1.5  shrink-0 text-primary"
                           />
                         ) : (
-                          <span className="mt-0.5 w-3.5 shrink-0 text-center font-mono text-[10px] text-neutral-600">
+                          <span className="mt-0.5 w-3.5 shrink-0 text-center font-mono text-xs text-neutral-400">
                             {j + 1}
                           </span>
                         )}
+
                         <div className="min-w-0">
-                          <p className="text-[12px] font-semibold leading-[18px] text-white">
+                          <p className="text-sm font-medium leading-relaxed text-white md:text-base">
                             {it.title}
                           </p>
+
                           {it.sub && (
-                            <p className="mt-0.5 text-[11px] leading-[17px] text-neutral-400">
+                            <p className="mt-0.5 text-xs font-medium leading-relaxed text-neutral-400 md:text-sm">
                               {it.sub}
                             </p>
                           )}
                         </div>
                       </div>
+
                       {j < b.items.length - 1 && (
-                        <div className="flex justify-center py-1 text-neutral-600">
-                          <ArrowDown size={12} />
+                        <div className="flex justify-center py-1 text-neutral-500">
+                          <ArrowDown size={13} />
                         </div>
                       )}
                     </li>
@@ -908,6 +951,7 @@ function Blocks({ items }: { items: Block[] }) {
                 })}
               </ol>
             );
+
           case "alphabet":
             return (
               <div
@@ -916,16 +960,24 @@ function Blocks({ items }: { items: Block[] }) {
               >
                 {B32.split("").map((ch, idx) => {
                   const on = b.mark.includes(ch);
+
                   return (
                     <div
                       key={ch}
-                      className={`flex flex-col items-center rounded border py-1.5 ${on ? "border-emerald-400/40 bg-emerald-400/10" : "border-white/10 bg-white/[.02]"}`}
+                      className={`flex flex-col items-center rounded border py-1.5 ${
+                        on
+                          ? "border-emerald-400/40 bg-emerald-400/10"
+                          : "border-white/10 bg-white/[.02]"
+                      }`}
                     >
-                      <span className="font-mono text-[8px] text-neutral-600">
+                      <span className="font-mono text-[9px] text-neutral-500">
                         {idx}
                       </span>
+
                       <span
-                        className={`font-mono text-[13px] ${on ? "font-bold text-emerald-300" : "text-neutral-300"}`}
+                        className={`font-mono text-sm ${
+                          on ? "font-bold text-emerald-300" : "text-neutral-300"
+                        }`}
                       >
                         {ch}
                       </span>
@@ -934,25 +986,29 @@ function Blocks({ items }: { items: Block[] }) {
                 })}
               </div>
             );
+
           case "link": {
             const Icon = b.dir === "up" ? ArrowUpLeft : ArrowDownRight;
+
             return (
               <a
                 key={i}
                 href={b.href}
-                className="group flex min-w-0 items-start justify-between gap-3 rounded-md border border-white/10 bg-white/[.02] px-3 py-3 transition-colors hover:border-white/25 hover:bg-white/[.04]"
+                className="group flex min-w-0 items-start justify-between gap-3 rounded-md border border-white/10 bg-white/[.02] px-4 py-3 transition-colors hover:border-white/25 hover:bg-white/[.04]"
               >
                 <span className="min-w-0">
-                  <span className="block font-mono text-[9px] uppercase tracking-widest text-neutral-400">
+                  <span className="block font-mono text-[10px] font-semibold uppercase tracking-widest text-neutral-400">
                     {b.label}
                   </span>
-                  <span className="mt-1 block text-[12px] leading-[19px] text-neutral-200">
+
+                  <span className="mt-1 block text-sm font-medium leading-relaxed text-neutral-300 md:text-base">
                     {b.text}
                   </span>
                 </span>
+
                 <Icon
-                  size={14}
-                  className="mt-0.5 shrink-0 text-neutral-400 group-hover:text-white"
+                  size={15}
+                  className="mt-0.5 shrink-0 text-neutral-400 transition-colors group-hover:text-white"
                 />
               </a>
             );
@@ -966,6 +1022,7 @@ function Blocks({ items }: { items: Block[] }) {
 /* ───────────── Page ───────────── */
 export default function UberRapidoNearbyDrivers() {
   const sectionId = (s: Step, i: number) => s.id ?? `step-${i + 1}`;
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -976,96 +1033,79 @@ export default function UberRapidoNearbyDrivers() {
     author: { "@type": "Person", name: "Madari Venkatesh" },
     keywords: SEO.tags.join(", "),
   };
+
   return (
     <article className="min-w-0">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+
       <header className="border-b border-white/10">
         <div className="hatch h-6 border-b border-white/10" />
+
         <div className="px-4 py-8 sm:px-6">
           <a
             href="/blogs"
-            className="inline-flex items-center gap-1.5 font-mono text-[10px] text-neutral-400 hover:text-white"
+            className="flex items-center gap-2 text-base font-semibold text-neutral-400 transition-colors hover:text-primary"
           >
-            <ArrowLeft size={12} /> All articles
+            <ArrowLeft size={16} />
+            All blogs
           </a>
-          <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[10px] text-neutral-400">
-            <time dateTime={SEO.date}>{SEO.dateLabel}</time>
-            <span>·</span>
+
+          <div className="mt-6 flex flex-wrap items-center -gap-x-1 gap-y-1 text-xs text-neutral-300">
+            <span>{SEO.date}</span>
+            <span>
+              <Dot className="text-neutral-300" size={18} />
+            </span>
             <span>{SEO.read}</span>
           </div>
+
           <h1 className="mt-3 font-serif text-[32px] leading-[1.1] text-white sm:text-[42px]">
             {SEO.h1}
           </h1>
-          <p className="mt-4 text-[13px] leading-[22px] text-neutral-300">
+
+          <p className="mt-4 text-sm font-medium leading-relaxed text-neutral-300 md:text-base">
             {SEO.description}
           </p>
-          {/* <div className="mt-5 flex flex-wrap gap-1">
-            {SEO.tags.map((t) => (<span key={t} className="rounded border border-white/10 px-1.5 py-0.5 font-mono text-[8px] text-neutral-400">{t}</span>))}
-          </div> */}
         </div>
+
         <div className="border-t border-white/10 px-4 py-5 sm:px-6">
-          <p className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
+          <p className="font-mono text-[10px] font-semibold uppercase tracking-widest text-neutral-400">
             What you&apos;ll use
           </p>
-          <div className="mt-3 flex flex-wrap gap-2">
+
+          <div className="mt-3 flex flex-wrap gap-1">
             {SEO.stack.map((s) => (
-              <span
-                key={s}
-                className="rounded border border-white/10 px-1.5 py-0.5 font-mono text-[11px] text-neutral-300"
-              >
-                {s}
-              </span>
+              <Tags key={s} name={s} />
             ))}
           </div>
         </div>
-        <div className="border-t border-white/10 p-4 sm:p-6">
-          <a
-            href={SEO.image}
-            target="_blank"
-            rel="noreferrer"
-            className="group block min-w-0 rounded-md border border-white/10 bg-white/[.02] p-3"
-          >
-            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-sm bg-neutral-900">
-              <Image
-                src={SEO.image}
-                alt={"Architecture diagram"}
-                fill
-                sizes="(min-width: 720px) 640px, 100vw"
-                priority
-                className="object-contain"
-              />
-            </div>
-            <div className="mt-3 flex items-center justify-between gap-3 font-mono text-[9px] text-neutral-400 group-hover:text-white">
-              <span>Fig. 1: Architecture diagram</span>
-              <span className="flex shrink-0 items-center gap-1">
-                Open full size <ArrowUpRight size={10} />
-              </span>
-            </div>
-          </a>
-        </div>
+
+        <ImageViewer image={SEO.image} title="Fig. 1: Architecture diagram" />
       </header>
 
       <nav aria-label="On this page" className="border-b border-white/10">
         <div className="hatch h-6 border-b border-white/10" />
-        <div className="px-4 py-3 sm:px-6">
-          <h2 className="font-serif text-[22px] leading-none text-white">
+
+        <div className="border-b border-white/10 px-4 py-3 sm:px-6">
+          <h2 className="font-serif text-[22px] leading-[1.15] text-white">
             On This Page
           </h2>
         </div>
-        <ol className="grid gap-x-6 gap-y-1.5 border-t border-white/10 px-4 py-4 font-mono text-[11px] text-neutral-430 sm:grid-cols-2 sm:px-6">
+
+        <ol className="grid gap-x-6 gap-y-2 px-4 py-4 text-sm  font-medium text-white sm:grid-cols-2 sm:px-6">
           {STEPS.map((s, i) => (
             <li key={s.title} className="min-w-0">
               <a
                 href={`#${sectionId(s, i)}`}
-                className="flex gap-2 hover:text-white"
+                className="flex gap-2 transition-colors hover:text-primary "
               >
-                <span className="text-neutral-600">
+                <span className="shrink-0 text-neutral-400">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <span className="truncate">{s.title}</span>
+
+                <span className="min-w-0">{s.title}</span>
               </a>
             </li>
           ))}
@@ -1079,47 +1119,24 @@ export default function UberRapidoNearbyDrivers() {
           className="min-w-0 scroll-mt-12 border-b border-white/10"
         >
           <div className="hatch h-6 border-b border-white/10" />
+
           <div className="flex items-baseline gap-3 border-b border-white/10 px-4 py-3 sm:px-6">
-            <span className="font-mono text-[10px] text-neutral-400">
+            <span className="font-mono text-xs font-medium text-neutral-400">
               {String(i + 1).padStart(2, "0")}
             </span>
+
             <h2 className="min-w-0 font-serif text-[22px] leading-[1.15] text-white">
               {s.title}
             </h2>
           </div>
-          <div className="px-4 py-5 text-[13px] leading-[22px] text-neutral-300 sm:px-6">
+
+          <div className="min-w-0 space-y-4 px-4 py-5 text-sm font-medium leading-relaxed text-neutral-300 md:text-base sm:px-6">
             <Blocks items={s.body} />
           </div>
         </section>
       ))}
 
-      <section className="min-w-0 border-b border-white/10">
-        <div className="hatch h-6 border-b border-white/10" />
-        <div className="flex flex-col items-start justify-between gap-4 px-4 py-6 sm:flex-row sm:items-center sm:px-6">
-          <div className="min-w-0">
-            <p className="font-mono text-[9px] uppercase tracking-widest text-neutral-400">
-              Related article
-            </p>
-            <p className="mt-2 font-serif text-[20px] leading-[1.15] text-white">
-              {SEO.relatedTitle}
-            </p>
-          </div>
-          <a
-            href={SEO.relatedHref}
-            className="inline-flex shrink-0 items-center gap-2 rounded-md bg-white px-4 py-2 text-[11px] font-semibold text-black"
-          >
-            Read next <ArrowUpRight size={12} />
-          </a>
-        </div>
-        <div className="border-t border-white/10 px-4 py-4 sm:px-6">
-          <a
-            href="/blogs"
-            className="inline-flex items-center gap-1.5 font-mono text-[10px] text-neutral-400 hover:text-white"
-          >
-            <ArrowLeft size={12} /> Back to all articles
-          </a>
-        </div>
-      </section>
+      <RelatedBlog title={SEO.relatedTitle} href={SEO.relatedHref} />
     </article>
   );
 }

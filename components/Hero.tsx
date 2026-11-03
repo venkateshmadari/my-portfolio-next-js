@@ -121,6 +121,7 @@ import {
   FileText,
 } from "lucide-react";
 import { Github, Linkedin } from "./icons";
+import Link from "next/link";
 
 const links = [
   {
@@ -155,6 +156,12 @@ const bullets = [
   "I care about performance and reliability, and I back it up with load testing. I build best when I can ship something that holds up in production.",
 ];
 
+const userDetails = {
+  name: "Madari Venkatesh",
+  title: "Full Stack Developer",
+  location: "Hyderabad, India",
+}
+
 export default function Hero() {
   return (
     <>
@@ -164,26 +171,26 @@ export default function Hero() {
         <ProfileShuffle />
 
         <div className="flex-1">
-          <h1 className="font-serif text-[28px] leading-none text-primary">
-            Madari Venkatesh
+          <h1 className="font-serif text-[28px] leading-none font-medium text-primary">
+            {userDetails.name}
           </h1>
 
-          <p className="mt-1 font-mono text-[11px] text-neutral-200">
-            Full Stack Developer
+          <p className="mt-1 font-bold text-xs text-neutral-200">
+            {userDetails.title}
           </p>
 
-          <p className="mt-1 flex items-center gap-2 font-mono text-[10px] text-neutral-400">
-            <MapPin size={10} />
-            Hyderabad, India
+          <p className="mt-1 flex items-center gap-1 font-semibold text-xs text-neutral-300">
+            <MapPin size={13} />
+            {userDetails.location}
           </p>
         </div>
 
-        <a
+        <Link
           href="#contact"
-          className="hidden h-8 items-center rounded-md border border-white/15 px-3 font-mono text-[10px] text-neutral-400 sm:flex"
+          className="hidden h-8 items-center rounded-md border border-white/15 px-3 text-xs text-neutral-300 font-semibold sm:flex"
         >
           Hire me
-        </a>
+        </Link>
       </div>
 
       <Section id="about" title="Hello, World" right={null}>

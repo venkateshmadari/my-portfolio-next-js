@@ -19,13 +19,7 @@ export const blogs: Blog[] = [
     title: "How Uber and Rapido Find Nearby Drivers",
     description:
       "How ride apps find nearby drivers in milliseconds: Geohash narrows the search, Redis stores live locations and Haversine filters by radius. Worked example included.",
-    techStacks: [
-      "Geohashing",
-      "Redis",
-      "Haversine",
-      "GEOSEARCH",
-      "Node.js",
-    ],
+    techStacks: ["Geohashing", "Redis", "Haversine", "GEOSEARCH", "Node.js"],
     minRead: 13,
     link: "/blogs/how-uber-and-rapido-find-nearby-drivers",
   },
@@ -86,11 +80,11 @@ export default function BlogList({ posts = blogs }: { posts?: Blog[] }) {
         <h1 className="font-serif text-[22px] leading-none text-white">
           Field Notes
         </h1>
-        <span className="font-mono text-[9px] text-neutral-400">
-          {posts.length} {posts.length === 1 ? "article" : "articles"}
+        <span className="text-xs font-semibold flex items-center gap-2 text-neutral-400 transition-colors hover:text-primary">
+          {posts.length} {posts.length === 1 ? "Blog" : "Blogs"}
         </span>
       </div>
-      <p className="px-4 pt-5 text-[12px] leading-[19px] text-neutral-400 sm:px-6">
+      <p className="px-4 pt-5 md:text-base text-sm font-medium leading-relaxed  sm:px-6">
         Guides and write-ups from things I've built, deployed and broken along
         the way.
       </p>

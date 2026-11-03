@@ -19,7 +19,9 @@
     "postcss": "^8.5.28",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "react-hot-toast": "^2.6.1"
+    "react-hot-toast": "^2.6.1",
+    "shiki": "^4.6.0",
+    "sugar-high": "^2.6.4"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.3",
