@@ -30,12 +30,34 @@ section {
 @theme {
   --color-primary: #00bc7d;
 }
-/* sugar-high basic theme */
-.sugar-high .sh__line { display: block; }
-.sugar-high .sh__token--keyword { color: #c678dd; }
-.sugar-high .sh__token--string { color: #98c379; }
-.sugar-high .sh__token--comment { color: #5c6370; font-style: italic; }
-.sugar-high .sh__token--number { color: #d19a66; }
-.sugar-high .sh__token--function { color: #61afef; }
-.sugar-high .sh__token--operator { color: #56b6c2; }
-.sugar-high .sh__token--punctuation { color: #abb2bf; }
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+/* Scrollbar Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Scrollbar Thumb */
+::-webkit-scrollbar-thumb {
+  background: #525252;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+  transition: background 0.3s ease;
+}
+
+/* Scrollbar Hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #737373;
+  background-clip: padding-box;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #525252 transparent;
+}

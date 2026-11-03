@@ -13,6 +13,19 @@ export type Blog = {
 
 export const blogs: Blog[] = [
   {
+    id: "custom-ai-chatbot-with-rag",
+    title:
+      "How to Build a Custom AI Chatbot with RAG Using Gemini, LangChain, Puppeteer.",
+
+    description:
+      "A step-by-step guide to building a chatbot that answers questions from your own website content. You will scrape pages with Puppeteer, chunk them with LangChain, embed them with Gemini, store everything in MySQL with Prisma and retrieve answers using cosine similarity. You will also build the Next.js API route and a floating chat widget.",
+    image: "/ai-chatbot-img.png",
+    name: "AI & RAG",
+    techStacks: ["RAG", "Gemini", "LangChain", "Puppeteer", "Prisma", "MySQL"],
+    minRead: 25,
+    link: "/blogs/custom-ai-chatbot-with-rag",
+  },
+  {
     id: "how-uber-and-rapido-find-nearby-drivers",
     name: "System Design & Geohashing",
     image: "/how-uber-and-rapido-find-nearby-drivers.png",

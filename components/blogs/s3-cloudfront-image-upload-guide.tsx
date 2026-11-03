@@ -11,6 +11,7 @@ import { codeToHtml } from "shiki";
 import Tags from "../common/Tags";
 
 import ImageViewer from "../common/ImageViewer";
+import RelatedBlog from "../common/RelatedBlog";
 
 /* ───────────────────────── Types ───────────────────────── */
 
@@ -1120,6 +1121,7 @@ export default function S3CloudFrontImageGuide() {
           </div>
         </section>
       ))}
+           <RelatedBlog title="How Uber and Rapido Find Nearby Drivers in Real Time" href="/blogs/how-uber-and-rapido-find-nearby-drivers" />
     </article>
   );
 }
