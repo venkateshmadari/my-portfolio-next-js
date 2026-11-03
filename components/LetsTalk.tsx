@@ -14,8 +14,8 @@ interface FormData {
 const empty: FormData = { fullName: "", email: "", subject: "", message: "" };
 
 const field =
-  "w-full rounded-md border border-white/10 bg-white/[.02] px-3 py-2 text-[12px] text-white placeholder:text-neutral-600 focus:border-white/30 focus:outline-none disabled:opacity-50";
-const label = "mb-1 block font-mono text-[10px] uppercase tracking-widest text-neutral-200";
+  "w-full rounded-md border border-white/10 bg-white/[.02] px-3 py-2 text-sm font-medium text-white placeholder:text-neutral-400 focus:border-white/30 focus:outline-none disabled:opacity-50";
+const label = "mb-1 block text-xs font-semibold uppercase tracking-widest text-neutral-200";
 
 export default function LetsTalk() {
   const [open, setOpen] = useState(false);
@@ -83,7 +83,7 @@ export default function LetsTalk() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="rounded-md bg-primary px-4 py-2 text-[11px] font-semibold text-black cursor-pointer"
+        className="rounded-md bg-primary px-4 py-2 text-sm font-semibold text-black cursor-pointer"
       >
         Let's Talk →
       </button>
@@ -99,7 +99,7 @@ export default function LetsTalk() {
           <div className="my-auto w-full max-w-[440px] rounded-md border border-white/10 bg-[#0a0a0a] text-left shadow-2xl">
             <div className="hatch h-4 border-b border-white/10" />
             <div className="flex items-center justify-between border-b border-white/10 px-4 py-3 sm:px-5">
-              <h2 id="contact-title" className="font-serif text-[22px] leading-none text-primary">
+              <h2 id="contact-title" className="font-serif text-2xl font-semibold tracking-wide leading-none text-primary">
                 Say Hello
               </h2>
               <button
@@ -113,7 +113,7 @@ export default function LetsTalk() {
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4 px-4 py-5 sm:px-5">
-              <p className="text-[11px] leading-[16px] text-neutral-400">
+              <p className="text-sm leading-relaxed text-white">
                 Drop a message and I'll get back to you by email.
               </p>
               <div>
@@ -176,14 +176,14 @@ export default function LetsTalk() {
                   type="button"
                   onClick={close}
                   disabled={sending}
-                  className="rounded-md border border-white/10 px-4 py-2 text-[11px] text-neutral-400 hover:text-white disabled:opacity-50 cursor-pointer"
+                  className="rounded-md border border-white/10 px-4 py-2 text-sm font-medium text-neutral-100 hover:text-white disabled:opacity-50 cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={sending}
-                  className="rounded-md bg-white px-4 py-2 text-[11px] font-semibold text-black disabled:opacity-60 cursor-pointer"
+                  className="rounded-md bg-white px-4 py-2 text-sm font-medium text-black disabled:opacity-60 cursor-pointer"
                 >
                   {sending ? "Sending..." : "Send a message"}
                 </button>
