@@ -81,7 +81,7 @@ const ACHIEVEMENTS = [
     image:
       "https://github.githubassets.com/images/modules/profile/achievements/pair-extraordinaire-default.png",
     coverImage:
-      "https://github.githubassets.com/assets/pair-extraordinaire-detail-5c9ced120632.png",
+      "https://github.githubassets.com/assets/pair-extraordinaire-detail-de4e395339a2.png",
     subtitle:
       "@venkateshmadari coauthored commits on merged pull requests.",
   },
